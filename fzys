@@ -1,0 +1,90 @@
+import java.util.Scanner;
+
+public class fzys {
+	
+	
+	
+	
+	
+ public static float operation(float a, float b, char symbol){
+  float result;
+  switch(symbol){
+  case '+':
+   result=a+b;
+   break;
+  case'-':
+   result=a-b;
+   break;
+  case'*':
+   result=a*b;
+   break;
+  case'/':
+   result=a/b;
+   break;
+  default:
+   result=0;
+   break;
+  }
+  return result;
+ }
+ 
+ 
+ 
+ 
+ 
+ public static String getResult(float[] arr){
+  String result="";
+  int count=0;
+  char[] symbol={'+','-','*','/'};
+  
+        for(int i=0; i<4;i++){
+         for(int j=0;j<4;j++){
+          for(int k=0; k<4;k++){
+           if(fzys.operation(fzys.operation(fzys.operation(arr[0], arr[1], symbol[i]), arr[2], symbol[j]), arr[3], symbol[k])==24){
+        	 result="(("+arr[0]+symbol[i]+arr[1]+")"+symbol[j]+arr[2]+")"+symbol[k]+arr[3]+"=24";
+            System.out.println(result);
+            count++;
+        }
+           if(fzys.operation(fzys.operation(arr[0], fzys.operation(arr[1], arr[2], symbol[j]), symbol[i]), arr[3], symbol[k])==24){
+          	 result="("+arr[0]+symbol[i]+"("+arr[1]+symbol[j]+arr[2]+"))"+symbol[k]+arr[3]+"=24";
+              System.out.println(result);
+              count++;
+        }
+           if(fzys.operation(arr[0], fzys.operation(fzys.operation(arr[1], arr[2], symbol[j]), arr[3], symbol[k]), symbol[i])==24){
+          	 result=""+arr[0]+symbol[i]+"(("+arr[1]+symbol[j]+arr[2]+")"+symbol[k]+arr[3]+")=24";
+              System.out.println(result);
+              count++;
+        } 
+           if(fzys.operation(arr[0],fzys.operation(arr[1], fzys.operation(arr[2], arr[3], symbol[k]), symbol[j]), symbol[i])==24){
+            	 result=""+arr[0]+symbol[i]+"("+arr[1]+symbol[j]+"("+arr[2]+symbol[k]+arr[3]+"))=24";
+                System.out.println(result);
+                count++;
+        }    
+     }
+    }
+   }
+  if(count==0){
+  	  System.out.println("没有方法可以得到24");
+    }
+    else{
+  	  System.out.println("共有"+count+"种计算方法");
+    }
+  return result;
+ }
+ 
+ 
+ 
+ 
+ 
+ public static void main(String[] args){
+	 int n=4;
+	 float array[]=new float[n]; 
+     Scanner sc=new Scanner(System.in);
+     System.out .println("请输入4个1~9内的数字(用空格隔开)：");
+     for(int i=0;i<array.length;i++)
+     {
+         array[i]=sc.nextInt();
+     }
+      fzys.getResult(array);
+ }
+}
