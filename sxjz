@@ -1,0 +1,67 @@
+import java.util.Scanner;
+
+public class sxjz {
+
+	
+	public static void main(String[] args) {
+		
+		int x,y;                               //x表示行，y表示列
+		int right;                             //行进方向，1表示在右上，0表示左下
+		x=y=1;
+		right=0;
+		Scanner sc=new Scanner(System.in);
+		int n=sc.nextInt();
+		int[][] a=new int[n][n];
+
+		for(int i=1;i<=n*n;i++){                //计数器i
+			  a[x-1][y-1]=i;                    // 填充数据
+			  
+			  if (right==1) {                   //定位判断，
+			    if(x==1||y+1>n){                //边缘位置判断
+			      right=0;                     
+			      if (y+1>n){                   // 边缘位置最右处则填入下一行
+			        x++;
+			      }
+			     else{                         // 边缘位置非最右处则填入下一列
+			        y++;
+			      }
+			    }
+			    else{                          //未在边缘位置
+			      x--;
+			      y++;
+			    }
+			  }
+			  else{
+				  
+			    if(y==1||x+1>n){              //边缘位置判断
+			      right=1;
+			      if (x+1>n){                 // 边缘位置最底处则填入下一列
+			        y++;
+			      }
+			      else{                       // 边缘位置非最底处则填入下一行
+			        x++;
+			      }
+			    }
+			    else{                         //未在边缘位置
+			      x++;
+			      y--;
+			    }
+			  }
+			}
+		
+		
+		
+		for(int i=0; i<n; i++) {            //输出结果
+            for(int j=0; j<n; j++) {
+            	if(j==n-1)
+            	{
+            		 System.out.println(a[i][j]);
+            	}
+            	else {
+            		System.out.print(a[i][j] + " ");
+            	}
+            }
+        }
+    }
+
+}
