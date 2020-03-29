@@ -1,0 +1,51 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.*;
+ 
+public class qszyx {
+	
+	static Scanner sc=new Scanner(System.in);
+	static BigDecimal gold;
+	
+	static void GetGold() {                                        //获取黄金分割比1.618
+		BigDecimal two=BigDecimal.valueOf(2);                      //valueof方法，类型转换
+		BigDecimal three=BigDecimal.valueOf(3);
+		BigDecimal five=BigDecimal.valueOf(5);
+		BigDecimal l=two,r=three;
+		for (int i=0; i<100; i++) {
+			BigDecimal mid=l.add(r).divide(two);
+			if (mid.multiply(mid).compareTo(five)<0) {
+				l=mid;
+			} else {
+				r=mid;
+			}
+		}
+		gold=l.add(BigDecimal.ONE).divide(two);
+	}
+ 
+	public static void main(String[] args) {
+ 
+		GetGold();
+		BigDecimal a,b;
+		System.out.print("请输入两堆石子的数量（用空格分隔）：");
+		while (sc.hasNext()) {
+			a=sc.nextBigDecimal();
+			b=sc.nextBigDecimal();
+			if(a.compareTo(b)>0){             //如果第一个值比第二个值小，实现交换，保证第一个值小于第二个值
+				BigDecimal mid;
+				mid=a;
+				a=b;
+				b=mid;
+			}
+			BigDecimal k=gold.multiply(b.subtract(a));
+			BigInteger tk=k.toBigInteger();
+			BigInteger ta=a.toBigInteger();
+			if (tk.equals(ta)){               //先手输了
+				System.out.println(0);
+			} else {                          //先手赢了
+				System.out.println(1);
+			}
+			System.out.print("请输入两堆石子的数量（用空格分隔）：");
+		}
+	}
+}
