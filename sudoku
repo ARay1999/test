@@ -13,5 +13,6 @@ public class sudoku {
 			ab.writeFile(true);//将结果写入指定文件中
 		}
 	}
-	
+
+
 }
